@@ -1,1 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XML Viewer</title>
+</head>
+<body>
+    <div id="xml-content"></div>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (this.readyState === 4 && this.status === 200) {
+                    displayXML(this);
+                }
+            };
+            xhr.open("GET", "artysleepwalks.wordpress.2024-06-15.000.xml", true); // Replace with your actual XML file name
+            xhr.send();
+
+            function displayXML(xml) {
+                var xmlDoc = xml.responseXML;
+                var xmlString = new XMLSerializer().serializeToString(xmlDoc);
+                document.getElementById("xml-content").innerHTML = xmlString;
+            }
+        });
+    </script>
+</body>
+</html>
